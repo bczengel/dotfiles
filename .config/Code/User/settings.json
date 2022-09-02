@@ -1,0 +1,35 @@
+{
+    "remote.SSH.remotePlatform": {
+        "work-mac": "macOS"
+    },
+    "yaml.schemas": {
+        "file:///Users/brian/.vscode-server/extensions/atlassian.atlascode-2.10.12/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+    },
+    "redhat.telemetry.enabled": true,
+    "atlascode.jira.jqlList": [
+        {
+            "id": "5a14cc58-3de3-4b17-9dba-c43bb3458529",
+            "enabled": true,
+            "name": "My Amplified IT Issues",
+            "query": "assignee = currentUser() AND resolution = Unresolved ORDER BY lastViewed DESC",
+            "siteId": "cf4d51b9-5652-4726-a6dc-746285a27eef",
+            "monitor": true
+        }
+    ],
+    "editor.inlineSuggest.enabled": true,
+    "editor.fontSize": 12,
+    "github.copilot.enable": {
+        "*": true,
+        "yaml": false,
+        "plaintext": true,
+        "markdown": false
+    },
+    "git.autofetch": true,
+    "workbench.colorTheme": "Catppuccin Mocha",
+    "git.enableSmartCommit": true,
+    "workbench.sideBar.location": "right",
+    "terminal.integrated.tabs.location": "left",
+    "editor.codeLensFontSize": 8,
+    "editor.fontFamily": "OperatorMonoLig Nerd Font Mono",
+    "editor.fontLigatures": true
+}
