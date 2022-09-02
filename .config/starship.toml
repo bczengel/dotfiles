@@ -1,0 +1,159 @@
+# Don't print a new line at the start of the prompt
+add_newline = true
+
+format = """
+[  ❯](#cdd6f4) $username
+[  ❯](#89b4fa) $gcloud$aws$kubernetes${custom.fbproject}
+[ 襁❯](#f9e2af) $time$status$cmd_duration$hostname$memory_usage$jobs$battery
+[  ❯](#f38ba8) $directory$nodejs$python$package$git_branch $git_status $git_state $git_metrics$golang $terraform$docker_context
+[ ](#a6e3a1) $character"""
+
+# Replace the "❯" symbol in the prompt with "➜"
+[character]                            # The name of the module we are configuring is "character"
+success_symbol = "[❯](#a6e3a1)"     # The "success_symbol" segment is being set to "➜" with the color "green"
+error_symbol = "[>X<](#f38ba8)" # used if previous command failed
+
+[cmd_duration]
+show_milliseconds = true
+format = "took [$duration](#f9e2af) "
+disabled = false
+show_notifications = true   
+
+[kubernetes]
+format = 'context: [⎈ $context \($namespace\)](cyan) '
+disabled = false
+# [kubernetes.context_aliases]
+# "dev.local.cluster.k8s" = "dev"
+
+[memory_usage]
+format = "[ ${ram} ${ram_pct}( 李${swap} ${swap_pct})]($style) "
+disabled = false
+threshold = -1
+symbol = ""
+style = "#94e2d5"
+
+[gcloud]
+style = "#cdd6f4"
+# format = '[$symbol$account@$domain(\($project\))]($style) '
+format = '[$symbol$project]($style) '
+symbol = "️gcp:"
+[gcloud.region_aliases]
+us-central1 = "uc1"
+asia-northeast1 = "an1"
+
+[aws]
+format = '[$symbol$profile(\($region\))]($style) '
+style = "#f9e2af"
+symbol = "a:"
+[aws.region_aliases]
+ap-southeast-2 = "au"
+us-east-1 = "va"
+
+[package]
+format = "[ $version](208) "
+
+[docker_context]
+format = "docker: [ $context](#cdd6f4)"
+disabled = false
+
+[directory]
+truncation_length = 7
+truncation_symbol = "…/"
+
+[username]
+style_user = "#cdd6f4"
+style_root = "#f38ba8"
+format = "user: [$user]($style) "
+disabled = false
+show_always = true
+
+[time]
+disabled = false
+format = '[\[ $time \]]($style) '
+
+[hostname]
+ssh_only = false
+format = 'on [$hostname](#f38ba8) '
+trim_at = "."
+disabled = false
+
+[status]
+style = "#f38ba8"
+symbol = " "
+format = '[\[$symbol$status\]]($style) '
+disabled = false
+
+[git_branch]
+format = "[$symbol](green)[$branch]($style)"
+style = "underline #a6e3a1"
+symbol = " "
+
+[git_status]
+ahead = " ⇡${count} "
+diverged = " ⇕ ⇡${ahead_count} ⇣${behind_count} "
+behind = " ⇣${count} "
+conflicted = " = "
+untracked = " ? "
+stashed = " "
+modified = " ! "
+staged = '[++\($count\)](#a6e3a1)'
+renamed = " » "
+deleted = " ✘ "
+
+[git_metrics]
+added_style = "#cdd6f4"
+format = '[+$added]($added_style)/[-$deleted]($deleted_style) '
+
+[git_state]
+format = '[\($state( $progress_current of $progress_total)\)]($style) '
+cherry_pick = "[ PICKING](#f38ba8)"
+
+[nodejs]
+symbol = " "
+
+[python]
+symbol = " "
+
+[helm]
+format = "helm: [⎈ $version](white) "
+
+[jobs]
+symbol = "+ "
+threshold = 4
+format = "background [$symbol$number]($style) "
+
+[terraform]
+format = "[�� $version$workspace]($style) "
+
+[battery]
+full_symbol = " "
+charging_symbol = " "
+discharging_symbol = " "
+
+[[battery.display]]  # "#f38ba8" style when capacity is between 0% and 10%
+threshold = 10
+style = "#f38ba8"
+
+[[battery.display]]  # "#f9e2af" style when capacity is between 10% and 30%
+threshold = 30
+style = "#f9e2af"
+
+[[battery.display]]
+threshold = 100
+style = "#a6e3a1"
+
+[custom.fbproject]
+command = "~/.config/firebase-context.sh"
+style = "#cdd6f4"
+format = '[$symbol$output]($style) '
+symbol = "️fb:"
+when = "~/.config/firebase-test.sh"
+ignore_timeout = true
+
+[custom.firebase]
+command = "echo $(cat ~/.config/configstore/firebase-tools.json | jq -r .user.email)"
+style = "#cdd6f4"
+format = '[$symbol$output]($style)'
+symbol = "️fb:"
+when = "test -f ~/.config/configstore/firebase-tools.json"
+ignore_timeout = true
